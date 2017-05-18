@@ -54,19 +54,15 @@ void priority_queue_insert (Queue * queue, int value, int priority)
 	n->val = value;
 	n->priority = priority;
 	n->next = NULL;
-
 	aux = queue->first;
-	if (queue->first == NULL )
-	{
-		queue->first =  n;
-	} else if (aux->priority < priority)
+	if (queue->first == NULL || aux->priority <= priority)
 	{
 		n->next = queue->first;
 		queue->first = n;
 
 	}else {
 		aux2 = aux ;
-		while (aux->next != NULL  && aux->priority >= priority)
+		while (aux != NULL  && aux->priority >= priority)
 		{
 			aux2 = aux;
 			aux= aux->next;
@@ -76,3 +72,25 @@ void priority_queue_insert (Queue * queue, int value, int priority)
 	} 
 }
 
+int main () 
+{
+	Queue * q = priority_queue_create();
+
+	priority_queue_insert(q, 3, 3);
+	priority_queue_print(q);
+printf("sai\n");
+	priority_queue_insert(q, 4, 5);
+
+	priority_queue_print(q);
+	printf("sai\n");
+	priority_queue_insert(q, 4, 5);
+	priority_queue_print(q);
+printf("sai\n");
+	priority_queue_insert(q, 1, 2);
+
+	priority_queue_print(q);
+	printf("sai\n");
+	printf(" peguei %d  \n", priority_queue_get(q));
+	priority_queue_print(q);
+	return 0;
+}
